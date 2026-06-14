@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Administrador - Lily Perfumes</title>
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
+
+<body>
+
+    <div class="zona-central">
+        <div class="contenedor-login">
+            <img src="img/logo_lily-removebg.png" alt="Lily Perfumes" class="logo-marca">
+            
+            <form id="formulario-login">
+                <div class="grupo-input">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" required placeholder="admin@lilyperfumes.com">
+                </div>
+                <div class="grupo-input">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-ingresar">Iniciar Sesión</button>
+                <div id="error-txt" class="error-mensaje">Usuario o contraseña incorrectos.</div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="contenido-footer">
+            <p>&copy; 2026 Lily Perfumes. Todos los derechos reservados.</p>
+            <div class="marca-desarrollador">
+                <span>Diseñado con ♥ por</span>
+                <img src="img/logo_develop.png" alt="Dev" class="logo-dev">
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlfqbQYd0MrHP2AGkm4gGDxtQE1GOXq9U",
+            authDomain: "lili-perfumes.firebaseapp.com",
+            projectId: "lili-perfumes",
+            storageBucket: "lili-perfumes.firebasestorage.app",
+            messagingSenderId: "777721122748",
+            appId: "1:777721122748:web:290706f8a79176f6d425b9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.auth = auth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    </script>
+
+    <script src="JS/login.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,487 @@
+body{
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f6f2;
+}
+
+.barra-superior {
+    position: fixed;        /* Ancla el elemento a la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;          /* Asegura que siempre quede por encima de las tarjetas */
+    background-color: #f8f6f2; /* Mismo color de fondo del body para que no sea transparente */
+    padding: 20px 20px 0 20px; /* Espaciado interno */
+    box-sizing: border-box;
+}
+
+header {
+    background: radial-gradient(circle, #441c66 0%, #2f114a 100%);
+    background-color: #3b1759;
+    padding: 0 20px; /* Corregido: 0 arriba/abajo elimina el espacio que asfixiaba al logo */
+    text-align: center;
+    border-radius: 14px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 140px; /* Subimos un poquito a 140px para dar un margen de maniobra premium */
+    overflow: hidden; /* Evita que cualquier residuo de la imagen se salga del contenedor */
+}
+
+header img {
+    height: 120px; /* Forzamos al logo a medir 120px de alto reales */
+    width: auto;   /* Mantiene la proporción horizontal perfecta */
+    object-fit: contain;
+    transform: scale(1.3); /* Truco maestro: Amplía la imagen de forma interna ignorando los bordes vacíos */
+}
+
+.contenedor_busqueda {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 45px;
+    padding: 0 20px;
+}
+
+.barra_filtros {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Fondo blanco limpio para contrastar con la sombra */
+    border: 1px solid #e3ded7;  /* Borde sutil y fino que delimita el óvalo */
+    border-radius: 50px;       /* Puntas perfectamente redondeadas y ovaladas */
+    padding: 4px 10px 4px 20px; /* Reducimos padding derecho y aumentamos el izquierdo para la lupa */
+    
+    /* Sombra elegante, suave y flotante con estética de alta gama */
+    box-shadow: 0 8px 24px rgba(142, 131, 115, 0.12), 
+                0 2px 6px rgba(0, 0, 0, 0.04); 
+                
+    max-width: 850px;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icono-lupa {
+    width: 20px;
+    height: 20px;
+    stroke: #5B2A86;       /* Color morado de tu marca */
+    margin-right: 0px;     /* Eliminamos separación extra para acercarla al texto */
+    flex-shrink: 0;
+}
+
+.barra_filtros input, 
+.barra_filtros select {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #4b5563;
+}
+
+.barra_filtros input {
+    flex: 1;
+    border-right: 1px solid #eae5dc; /* Línea divisoria vertical muy fina */
+}
+
+.barra_filtros input::placeholder {
+    color: #8e8373;
+    opacity: 0.8;
+}
+
+.barra_filtros select {
+    cursor: pointer;
+    color: #1f2937;
+    font-weight: 500;
+    padding-right: 20px;
+}
+
+.barra_filtros:focus-within {
+    border-color: #5B2A86;
+    /* La sombra se intensifica sutilmente con el color de la perfumería */
+    box-shadow: 0 10px 28px rgba(91, 42, 134, 0.12), 
+                0 3px 8px rgba(91, 42, 134, 0.04);
+}
+
+.btn-wsp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2000; /* Por encima del catálogo y del menú sticky */
+    transition: all 0.3s ease;
+}
+
+.btn-wsp:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+}
+
+.info-tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Este valor controla la separación exacta entre cada línea de texto (puedes subirlo o bajarlo) */
+    width: 100%;
+    margin-top: auto; /* Empuja todo el bloque de texto equitativamente hacia abajo respecto a la imagen */
+}
+
+h3 {
+    color: #1f2937;
+    font-family: Playfair Display, serif;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+p {
+    color: #4b5563;
+    font-family: poppins, sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+.info-tarjeta .precio {
+    color: #5B2A86; /* Usamos el morado de tu marca para destacar el precio */
+    font-weight: 600;
+    margin-top: 4px; /* Un mini respiro solo para el precio */
+}
+
+#contenedor_producto {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 280px auto 40px auto;
+}
+
+.tarjeta {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra sutil y fina */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Efecto visual cuando el usuario pasa el mouse */
+.tarjeta:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #eef0f2;
+    padding: 25px 20px;
+    margin-top: 50px;
+}
+
+.contenido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.marca-desarrollador {
+    display: flex;
+    align-items: center; /* Centra perfectamente el texto con tu logo de forma vertical */
+    gap: 14px;           /* Separa elegantemente el texto de las líneas de tu logo */
+}
+
+.logo-dev {
+    height: 55px;            /* ¡Agrandado! Subimos a 55px para que las letras de LILITH sean 100% legibles */
+    width: auto;             /* Mantiene la proporción horizontal intacta */
+    object-fit: contain;
+    
+    /* Quitamos el filtro gris y la opacidad baja para que tu logo luzca 
+       sus colores y degradados originales con total nitidez */
+    filter: none; 
+    opacity: 1; 
+    
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Efecto interactivo premium */
+.logo-dev:hover {
+    transform: scale(1.08); /* Crece sutilmente cuando el cliente pasa el mouse sobre tu firma */
+}
+
+/* Ajuste Responsivo para celulares */
+@media (max-width: 600px) {
+    .contenido-footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* --- ENTORNO RESPONSIVO CORREGIDO, COMPACTO Y ESTILIZADO (MÓVIL) --- */
+@media (max-width: 768px) {
+    
+    /* Mantiene la distancia justa para que el catálogo no se meta debajo de la barra fija */
+    #contenedor_producto {
+        margin-top: 230px; 
+    }
+
+    /* Contenedor principal en modo píldora compacta */
+    .barra_filtros {
+        flex-direction: column; 
+        align-items: stretch;   
+        border-radius: 20px;    /* Esquinas redondeadas sutiles */
+        padding: 6px 14px;      /* REDUCIDO: Menos espacio vertical interno */
+        gap: 0px;               
+        position: relative;     /* Necesario para anclar la lupa de forma exacta */
+        
+        max-width: 290px;       /* Un pelín más angosto para que sea estilizado */
+        width: 100%;
+        margin: 0 auto;         
+    }
+
+    /* Buscador compacto */
+    .barra_filtros input {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eae5dc; 
+        padding: 10px 35px 10px 5px;     /* REDUCIDO: Estprime la altura del input */
+        box-sizing: border-box;
+        text-align: left;                /* Alineación natural a la izquierda */
+        font-size: 15px;
+    }
+
+    /* Ubicación exacta y fija de la lupa sin importar la altura */
+    .icono-lupa {
+        position: absolute;
+        right: 25px;            /* Al extremo derecho interno de la barra */
+        top: 14px;              /* Centrado perfecto en la primera mitad */
+        margin: 0;
+        transform: none;        /* Eliminamos traslaciones raras que la desfasan */
+        z-index: 5;
+        width: 18px;            /* Un pelín más pequeña para mayor delicadeza */
+        height: 18px;
+    }
+
+    /* Desplegable de marcas compacto */
+    .barra_filtros select {
+        width: 100%;
+        padding: 10px 5px 6px 5px;       /* REDUCIDO: Más pegadito a la línea divisoria */
+        text-align: center;    
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
+
+/* --- VENTANA FLOTANTE DE DETALLE (CLIENTE) --- */
+.modal-detalle {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(47, 17, 74, 0.5); /* Tono púrpura translúcido */
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-detalle-contenido {
+    background: #ffffff;
+    width: 100%;
+    max-width: 780px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    animation: ventanaDesplegar 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-detalle-contenido .btn-cerrar-x {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #7c7365;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.modal-detalle-contenido .btn-cerrar-x:hover {
+    color: #441c66;
+}
+
+/* Área imagen */
+.modal-whitespace, .modal-detalle-izq {
+    background: #fcfbfa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+}
+
+.modal-detalle-izq img {
+    max-width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: contain;
+}
+
+/* Área texto */
+.modal-detalle-der {
+    padding: 45px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.txt-marca-top {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    color: #8e8373;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.modal-detalle-der h2 {
+    color: #2f114a;
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 15px 0;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.contenedor-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.badge-tag {
+    background: #eae5dc;
+    color: #3d352a;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.badge-tag.oro {
+    background: #f7ca18;
+    color: #311347;
+}
+
+.bloque-info-detalle {
+    margin-bottom: 18px;
+}
+
+.titulo-seccion-detalle {
+    margin: 0;
+    font-size: 12px;
+    color: #8e8373;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contenido-seccion-detalle {
+    margin: 3px 0 0 0;
+    font-size: 15px;
+    color: #3d352a;
+    font-family: 'Poppins', sans-serif;
+}
+
+.notas-italica {
+    font-style: italic;
+    color: #4b5563;
+}
+
+.precio-grande {
+    font-size: 30px;
+    font-weight: bold;
+    color: #5B2A86;
+    font-family: 'Playfair Display', serif;
+    margin-top: 15px;
+    border-top: 1px solid #eae5dc;
+    padding-top: 15px;
+}
+
+@keyframes ventanaDesplegar {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- ADAPTACIONES DE LA NUEVA BARRA EN ENTORNOS RESPONSIVOS --- */
+@media (max-width: 850px) {
+    #contenedor_producto {
+        margin-top: 360px; /* Aumentamos el margen para que no choque con la barra en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    #contenedor_producto {
+        margin-top: 400px; /* Margen para celular debido a la píldora vertical extendida */
+        grid-template-columns: 1fr !important; /* Tarjetas en una sola columna para leer bien */
+    }
+
+    .barra_filtros {
+        max-width: 320px;
+    }
+
+    .barra_filtros select {
+        border-left: none;
+        border-bottom: 1px solid #eae5dc;
+        padding: 10px 5px;
+    }
+
+    .barra_filtros select:last-child {
+        border-bottom: none;
+    }
+
+    .modal-detalle-contenido {
+        grid-template-columns: 1fr; /* El modal pasa a ser de un solo bloque vertical */
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-detalle-der {
+        padding: 25px;
+    }
+}

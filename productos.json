@@ -1,0 +1,30 @@
+[
+{
+    "id": 1,
+    "nombre": "Thank You Next",
+    "marca": "Ariana Grande",
+    "precio": 75000,
+    "imagen": "img/thankyou.jpg"
+},
+{
+    "id": 2,
+    "nombre": "212 VIP",
+    "marca": "Carolina Herrera",
+    "precio": 120000,
+    "imagen": "img/212vip.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "EROS",
+        "precio": 125000,
+        "marca": "Versace",
+        "imagen": "img/erosV.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "YARA",
+        "precio": 25000,
+        "marca": "Lattafa",
+        "imagen": "img/YARA.jpg"
+    }
+]

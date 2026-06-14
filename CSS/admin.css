@@ -1,0 +1,645 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fcfbfa; /* Tono cremita muy claro de fondo general */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #3d352a;
+}
+
+/* --- HEADER ESTILIZADO --- */
+.header-admin {
+    background-color: #4c1d6f; /* El púrpura de identidad corporativa */
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 12px rgba(76, 29, 111, 0.15);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0; /* Evita que el contenedor del logo se exprima si falta espacio */
+}
+
+/* Contenedor del logo para que no se achique */
+.login-logo-container, 
+.contenedor-logo-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Espacio con el campo de correo */
+}
+
+/* Ajuste directo a la imagen del logo en el login */
+.login-logo-img,
+.form-login img,
+.panel-formulario img {
+    width: 130px !important;    /* Forzamos un ancho más grande y visible */
+    height: 130px !important;   /* Mantiene la proporción cuadrada del marco floral */
+    object-fit: contain;        /* Evita que el perrito o las flores se deformen */
+    margin: 0 auto;
+    display: block;
+}
+
+.logo-header-img {
+height: 65px; /* Aumentado de 40px a 65px para darle más protagonismo */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15)); /* Un toque sutil para resaltar las flores */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto sutil al pasar el mouse por encima */
+.logo-header-img:hover {
+    transform: scale(1.05);
+}
+
+.header-titulo {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-cerrar-sesion {
+    background-color: #f7ca18; /* Amarillo oro idéntico al login */
+    color: #311347;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s, transform 0.2s;
+    white-space: nowrap;
+}
+
+.btn-cerrar-sesion:hover {
+    background-color: #e5b813;
+    transform: translateY(-1px);
+}
+
+/* --- CONTENEDOR GRID PRINCIPAL --- */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 340px 1fr; /* Columna de carga fija, inventario flexible */
+    gap: 30px;
+    padding: 40px 30px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1; /* Empuja el footer siempre a la base */
+}
+
+/* --- NUEVOS CAMPOS FORMULARIO ADMINISTRACIÓN --- */
+
+.grupo-input-admin {
+    margin-bottom: 15px;
+}
+
+.grupo-input-admin label {
+    display: block;
+    margin-bottom: 5px;
+    color: #7c7365;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.grupo-input-admin select,
+.grupo-input-admin input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eae5dc;
+    box-sizing: border-box; /* Evita que los inputs se salgan de los márgenes */
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #3d352a;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Efecto visual cuando el administrador hace clic en el campo */
+.grupo-input-admin select:focus,
+.grupo-input-admin input[type="text"]:focus {
+    border-color: #5B2A86; /* El morado característico de tu marca */
+}
+
+/* --- PANEL IZQUIERDO: FORMULARIO --- */
+.panel-formulario {
+    background-color: #4c1d6f;
+    border-radius: 24px;
+    padding: 30px 25px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(76, 29, 111, 0.15);
+    height: fit-content;
+    width: 100%;
+}
+
+.panel-formulario h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 22px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.grupo-input-admin {
+    margin-bottom: 20px;
+}
+
+.grupo-input-admin label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #eae5dc;
+}
+
+.grupo-input-admin input {
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    background-color: #eae5dc;
+    color: #3d352a;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.12);
+}
+
+.btn-guardar {
+    background-color: #f7ca18;
+    color: #311347;
+    border: none;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-guardar:hover {
+    background-color: #e5b813;
+    transform: translateY(-2px);
+}
+
+/* --- PANEL DERECHO: INVENTARIO Y TABLA --- */
+.panel-inventario {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eae5dc;
+    min-width: 0; /* Previene el desborde en contenedores flex/grid */
+}
+
+.inventario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.inventario-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #311347;
+}
+
+/* BUSCADOR MODERNO */
+.buscador-box {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+}
+
+.buscador-box i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7c7365;
+}
+
+.buscador-box input {
+    width: 100%;
+    padding: 11px 20px 11px 45px;
+    border: 1px solid #eae5dc;
+    border-radius: 50px;
+    background-color: #fcfbfa;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.buscador-box input:focus {
+    border-color: #4c1d6f;
+}
+
+/* TABLA LIMPIA Y MODERNA */
+.tabla-responsiva {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabla-productos {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px; /* Asegura que mantenga estructura legible en scroll */
+}
+
+.tabla-productos th {
+    background-color: #3d352a; /* Fondo elegante para encabezados */
+    color: #ffffff;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tabla-productos th:last-child,
+.tabla-productos td:last-child {
+    width: 100px;
+    text-align: center;
+}
+.tabla-productos td {
+    padding: 14px 15px;
+    border-bottom: 1px solid #eae5dc; /* Línea fina en vez de bordes gruesos */
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.img-tabla-preview {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    background-color: #fcfbfa;
+    border-radius: 8px;
+    padding: 3px;
+    border: 1px solid #eae5dc;
+}
+
+.txt-centro { text-align: center; }
+
+/* BOTONES DE ACCIÓN EDITAR / ELIMINAR */
+.celda-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-accion {
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-accion.editar { color: #4c1d6f; }
+.btn-accion.editar:hover { background-color: rgba(76, 29, 111, 0.1); }
+
+.btn-accion.eliminar { color: #e74c3c; }
+.btn-accion.eliminar:hover { background-color: rgba(231, 76, 60, 0.1); }
+
+/* --- FOOTER --- */
+footer {
+    background-color: rgba(252, 251, 250, 0.9);
+    border-top: 1px solid #eae5dc;
+    padding: 15px 30px;
+}
+
+.contenido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #7c7365;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.contenido-footer p { margin: 0; }
+
+.marca-desarrollador {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-dev {
+    height: 32px; 
+    object-fit: contain;
+}
+
+/* --- VENTANA FLOTANTE (MODAL) --- */
+.modal-container {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 21, 75, 0.6); 
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.modal-contenido {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 750px; /* Un poco más ancho para albergar cómodamente las dos columnas */
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    animation: desplegar 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    background-color: #4a154b;
+    color: white;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-cerrar-x {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* El cuerpo ahora divide los inputs a la izquierda y la imagen a la derecha de forma controlada */
+.modal-cuerpo-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Equilibrio perfecto de espacio */
+    gap: 24px;
+    padding: 24px;
+    max-height: 70vh; /* Previene que se salga de pantallas pequeñas */
+    overflow-y: auto; /* Permite scroll interno si hay muchos campos */
+}
+
+/* Contenedor que agrupa todos los inputs para que se mantengan verticales */
+.modal-inputs-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Forzar color oscuro para las etiquetas del modal */
+#formulario-producto-modal label {
+    color: #4a154b !important;       
+    font-weight: 700 !important;      
+    display: block !important;
+    margin-bottom: 6px !important;
+    font-size: 14px !important;
+    text-shadow: none !important;     
+}
+
+/* Corrección de alcance para inputs, selectores y textarea en el modal */
+#formulario-producto-modal input,
+#formulario-producto-modal select,
+#formulario-producto-modal textarea {
+    color: #2b2b2b !important;       
+    background-color: #ffffff !important; 
+    border: 1px solid #7c7365 !important; 
+    width: 100%;
+    padding: 11px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Altura y apariencia de los selectores */
+#formulario-producto-modal select {
+    height: 42px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a154b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Ajuste específico para el Textarea de Notas Aromáticas */
+#formulario-producto-modal textarea {
+    border-radius: 16px; /* Menos redondeado para conservar espacio útil */
+    resize: none;
+    height: 70px;
+}
+
+/* Caja de previsualización de imagen a la derecha */
+.modal-preview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #eae5dc;
+    border-radius: 12px;
+    padding: 20px;
+    background: #fcfbfa;
+    height: fit-content; /* Evita que se estire infinitamente hacia abajo */
+    align-self: start; /* Se acomoda arriba */
+}
+
+.modal-preview-box label {
+    font-weight: bold;
+    color: #4a154b;
+    margin-bottom: 12px;
+}
+
+#modal-img-preview {
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* FOOTER CORRECTO: Alineado abajo de manera horizontal */
+.modal-footer {
+    padding: 16px 24px;
+    background-color: #f7f5f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid #e1dbd2;
+}
+
+.btn-cancelar {
+    background-color: #7c7365;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+    background-color: #635c51;
+}
+
+.btn-guardar-modal {
+    background-color: #f7ca18; /* Amarillo corporativo idéntico al login */
+    color: #311347;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+
+.btn-guardar-modal:hover {
+    background-color: #e5b813;
+}
+
+.paginacion-controles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@keyframes desplegar {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- CONTROL RESPONSIVO UNIFICADO --- */
+
+/* Ajustes para Tablets */
+@media (max-width: 992px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Columna única */
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .panel-formulario {
+        max-width: 100%;
+    }
+
+    .header-admin {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+}
+
+/* Ajustes para Teléfonos Móviles */
+@media (max-width: 600px) {
+    .inventario-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buscador-box {
+        max-width: 100%;
+    }
+
+    .panel-inventario {
+        padding: 15px;
+    }
+
+    /* Colapso del Grid del modal */
+    .modal-cuerpo-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .modal-preview-box {
+        order: -1; /* Pone la previsualización de la imagen arriba en teléfonos */
+    }
+
+    .contenido-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+/* Asegura que los campos internos hereden el estilo redondeado elegante */
+.modal-inputs .grupo-input-admin input,
+.modal-inputs .grupo-input-admin select {
+    color: #2b2b2b !important;       
+    background-color: #ffffff !important; 
+    border: 1px solid #7c7365 !important; 
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Evita que la caja de la derecha se desproporcione verticalmente */
+.modal-preview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #7c7365;
+    border-radius: 12px;
+    padding: 20px;
+    background: #fdfbf7;
+    height: fit-content; 
+    align-self: start; /* Mantiene la caja arriba y estilizada */
+}
+
+/* Alineación horizontal perfecta para los botones */
+.modal-footer {
+    padding: 15px 20px;
+    background-color: #f7f5f0;
+    display: flex;
+    justify-content: flex-end; /* Los empuja al extremo derecho inferior */
+    gap: 12px;
+    border-top: 1px solid #e1dbd2;
+}

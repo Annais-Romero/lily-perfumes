@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Gestión - Lily Perfumes</title>
+    <link rel="stylesheet" href="CSS/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        // Verificamos si existe el indicador de sesión en el sessionStorage o localStorage
+        const sesionActiva = sessionStorage.getItem('userLogged') || localStorage.getItem('userLogged');
+
+        if (!sesionActiva) {
+            // Te manda al login de inmediato sin mostrar la página
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header-admin">
+        <div class="header-logo">
+            <img src="img/logo_lily-removebg.png" alt="Lily Perfumes" class="logo-header-img">
+        </div>
+        <h1 class="header-titulo">Panel de Gestión</h1>
+        <button class="btn-cerrar-sesion" id="btn-logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="panel-formulario">
+            <h2>Nuevo Producto</h2>
+            <form id="formulario-producto">
+                <div class="grupo-input-admin">
+                    <label for="nombre-prod">Nombre</label>
+                    <input type="text" id="nombre-prod" required placeholder="Ej. Lily Essence 100ml">
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="marca-prod">Marca</label>
+                    <input type="text" id="marca-prod" required placeholder="Ej. O Boticário">
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="precio-prod">Precio</label>
+                    <input type="number" id="precio-prod" required placeholder="Ej. 45000">
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="url-prod">URL de la Imagen</label>
+                    <input type="url" id="url-prod" required placeholder="https://enlace-imagen.com/foto.jpg">
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="genero-prod">Género</label>
+                    <select id="genero-prod" required>
+                        <option value="" disabled selected>Selecciona género...</option>
+                        <option value="Femenino">Femenino 🌸</option>
+                        <option value="Masculino">Masculino 💼</option>
+                        <option value="Unisex">Unisex 🌟</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="aroma-prod">Familia Olfativa (Aroma)</label>
+                    <select id="aroma-prod" required>
+                        <option value="" disabled selected>Selecciona aroma...</option>
+                        <option value="Floral">Floral</option>
+                        <option value="Cítrico">Cítrico</option>
+                        <option value="Amaderado">Amaderado</option>
+                        <option value="Dulce">Dulce</option>
+                        <option value="Frutal">Frutal</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="fijacion-prod">Nivel de Fijación</label>
+                    <select id="fijacion-prod" required>
+                        <option value="Moderada (4-6 horas)">Moderada (4-6 horas)</option>
+                        <option value="Alta (6-8 horas)" selected>Alta (6-8 horas)</option>
+                        <option value="Muy Alta (Más de 8 horas)">Muy Alta (Más de 8 horas)</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input-admin">
+                    <label for="notas-prod">Notas Aromáticas (Separadas por comas)</label>
+                    <input type="text" id="notas-prod" placeholder="Ej: Vainilla, Lavanda, Ámbar">
+                </div>
+
+                <button type="submit" class="btn-guardar">Guardar Producto</button>
+            </form>
+        </section>
+
+        <section class="panel-inventario">
+            <div class="inventario-header">
+                <h2>Inventario Actual</h2>
+                <div class="buscador-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="buscar-producto" placeholder="Buscar producto...">
+                </div>
+            </div>
+
+            <div class="tabla-responsiva">
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th class="txt-centro">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cuerpo"></tbody>
+                </table>
+            </div>
+            <div id="paginacion-controles"></div>
+        </section>
+
+    </main>
+
+    <div id="modal-editar" class="modal-container">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h2>Editar Producto</h2>
+                <button type="button" id="btn-cerrar-modal" class="btn-cerrar-x">&times;</button>
+            </div>
+
+            <form id="formulario-producto-modal">
+                <div class="modal-cuerpo-grid">
+                    
+                    <div class="modal-inputs">
+                        <div class="grupo-input-admin">
+                            <label for="modal-nombre-prod">Nombre</label>
+                            <input type="text" id="modal-nombre-prod" required>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-marca-prod">Marca</label>
+                            <input type="text" id="modal-marca-prod" required>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-precio-prod">Precio</label>
+                            <input type="number" id="modal-precio-prod" required>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-url-prod">URL de la Imagen (Postimages)</label>
+                            <input type="url" id="modal-url-prod" required>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-genero-prod">Género</label>
+                            <select id="modal-genero-prod" required>
+                                <option value="" disabled selected>Selecciona género...</option>
+                                <option value="Femenino">Femenino 🌸</option>
+                                <option value="Masculino">Masculino 💼</option>
+                                <option value="Unisex">Unisex 🌟</option>
+                            </select>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-aroma-prod">Familia Olfativa (Aroma)</label>
+                            <select id="modal-aroma-prod" required>
+                                <option value="" disabled selected>Selecciona aroma...</option>
+                                <option value="Floral">Floral</option>
+                                <option value="Cítrico">Cítrico</option>
+                                <option value="Amaderado">Amaderado</option>
+                                <option value="Dulce">Dulce</option>
+                                <option value="Frutal">Frutal</option>
+                            </select>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-fijacion-prod">Nivel de Fijación</label>
+                            <select id="modal-fijacion-prod" required>
+                                <option value="Moderada (4-6 horas)">Moderada (4-6 horas)</option>
+                                <option value="Alta (6-8 horas)">Alta (6-8 horas)</option>
+                                <option value="Muy Alta (Más de 8 horas)">Muy Alta (Más de 8 horas)</option>
+                            </select>
+                        </div>
+                        <div class="grupo-input-admin">
+                            <label for="modal-notas-prod">Notas Aromáticas (Separadas por comas)</label>
+                            <input type="text" id="modal-notas-prod" placeholder="Ej: Vainilla, Lavanda, Ámbar">
+                        </div>
+                    </div>
+
+                    <div class="modal-preview-box">
+                        <label>Vista Previa</label>
+                        <img id="modal-img-preview" src="img/logo_lily-removebg.png" alt="Preview">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btn-cancelar-modal" class="btn-cancelar">Cancelar</button>
+                    <button type="submit" class="btn-guardar-modal">Actualizar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="contenido-footer">
+            <p>&copy; 2026 Lily Perfumes. Todos los derechos reservados.</p>
+            <div class="marca-desarrollador">
+                <span>Diseñado con ♥ por</span>
+                <img src="img/logo_develop.png" alt="Dev" class="logo-dev">
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="JS/admin.js"></script>
+</body>
+
+</html>

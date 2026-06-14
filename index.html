@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumeria</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <nav class="barra-superior">
+        <header>
+            <img src="img/logo_lily-removebg.png" alt="Logo Lily Perfumes">
+        </header>
+
+        <section class="contenedor_busqueda">
+            <div class="barra_filtros">
+                <svg class="icono-lupa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="#7c7365" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                
+                <input type="text" id="buscador" placeholder="Buscar perfume...">
+                
+                <select id="FiltroMarca">
+                    <option value="todos">Todas las marcas</option>
+                </select>
+
+                <select id="FiltroGenero">
+                    <option value="todos">Todos los géneros</option>
+                    <option value="Femenino">Dama 🌸</option>
+                    <option value="Masculino">Varón 💼</option>
+                    <option value="Unisex">Unisex 🌟</option>
+                </select>
+
+                <select id="FiltroAroma">
+                    <option value="todos">Todos los aromas</option>
+                    <option value="Floral">Floral</option>
+                    <option value="Cítrico">Cítrico</option>
+                    <option value="Amaderado">Amaderado</option>
+                    <option value="Dulce">Dulce</option>
+                    <option value="Frutal">Frutal</option>
+                </select>
+            </div>
+        </section>
+    </nav>
+
+    <main id="contenedor_producto"></main>
+
+    <div id="modal-detalle-cliente" class="modal-detalle">
+        <div class="modal-detalle-contenido">
+            <button id="btn-cerrar-detalle" class="btn-cerrar-x">&times;</button>
+            
+            <div class="modal-detalle-izq">
+                <img id="detalle-img" src="" alt="Perfume">
+            </div>
+            
+            <div class="modal-detalle-der">
+                <span id="detalle-marca" class="txt-marca-top"></span>
+                <h2 id="detalle-nombre"></h2>
+                
+                <div class="contenedor-badges">
+                    <span id="badge-genero" class="badge-tag oro"></span>
+                    <span id="badge-aroma" class="badge-tag"></span>
+                </div>
+
+                <div class="bloque-info-detalle">
+                    <p class="titulo-seccion-detalle">✨ Fijación garantizada:</p>
+                    <p id="detalle-fijacion" class="contenido-seccion-detalle"></p>
+                </div>
+
+                <div class="bloque-info-detalle">
+                    <p class="titulo-seccion-detalle">🌸 Notas olfativas destacadas:</p>
+                    <p id="detalle-notas" class="contenido-seccion-detalle notas-italica"></p>
+                </div>
+
+                <div id="detalle-precio" class="precio-grande"></div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/56984413682?text=Hola!%20Me%20interesa%20consultar%20por%20un%20perfume" class="btn-wsp"
+        target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M13.601 2.326A7.85 7.85 0 0 0 12.41 1.7 7.89 7.89 0 0 0 8 .25c-4.411 0-8 3.589-8 8 0 1.504.425 2.941 1.232 4.197L.038 15.63a.5.5 0 0 0 .64.64l3.197-1.194A7.88 7.88 0 0 0 8 16.25c4.411 0 8-3.589 8-8 0-2.14-.83-4.15-2.399-5.724M10.56 11.86c-.32.32-.83.33-1.2.03-.43-.35-1.57-1.27-2.35-2.05-.78-.78-1.7-1.92-2.05-2.35-.3-.37-.29-.88.03-1.2l.62-.62c.2-.2.2-.53 0-.73l-1.08-1.08c-.2-.2-.53-.2-.73 0l-.53.53c-.6.6-.74 1.49-.37 2.22.42.82 1.34 2.27 2.47 3.4s2.58 2.05 3.4 2.47c.73.37 1.62.23 2.22-.37l.53-.53c.2-.2.2-.53 0-.73l-1.08-1.08c-.2-.2-.53-.2-.73 0z" />
+        </svg>
+    </a>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlfqbQYd0MrHP2AGkm4gGDxtQE1GOXq9U",
+            authDomain: "lili-perfumes.firebaseapp.com",
+            projectId: "lili-perfumes",
+            storageBucket: "lili-perfumes.firebasestorage.app",
+            messagingSenderId: "777721122748",
+            appId: "1:777721122748:web:290706f8a79176f6d425b9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.collection = collection;
+        window.getDocs = getDocs;
+    </script>
+
+    <script src="JS/app.js"></script>
+</body>
+
+<footer>
+    <div class="contenido-footer">
+        <p>&copy; 2026 Lily Perfumes. Todos los derechos reservados.</p>
+        <div class="marca-desarrollador">
+            <span>Diseñado con ♥ por</span>
+            <img src="img/logo_develop.png" alt="Tu Nombre/Marca Dev" class="logo-dev">
+        </div>
+    </div>
+</footer>
+
+</html>
