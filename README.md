@@ -150,7 +150,30 @@ Lily Perfumes es un **catálogo web**, no una tienda con pago integrado. En esta
 
 ## Evidencia visual
 
-Las capturas del catálogo, la vista móvil y el panel de gestión se incorporarán en una próxima actualización del README.
+Las siguientes imágenes muestran la interfaz desarrollada para el catálogo público y el panel administrativo. Son capturas de la versión del proyecto documentada aquí; **no representan una demostración pública actualmente activa**.
+
+### Panel de administración
+
+Permite registrar y consultar perfumes, buscar productos y acceder a acciones de edición y eliminación.
+
+![Captura del panel administrativo de Lily Perfumes con formulario de productos y tabla de inventario](img/lily-panel-administracion.png)
+
+### Catálogo adaptado a móviles
+
+Vista del catálogo con buscador, filtros por características y tarjetas con imagen, marca y precio.
+
+<p align="center">
+  <img src="img/lily-catalogo-movil.png" alt="Captura del catálogo móvil de Lily Perfumes" width="350" />
+</p>
+
+### Presentación visual del proyecto
+
+Estas imágenes son **montajes de presentación** que muestran las interfaces dentro de dispositivos; las capturas anteriores permiten ver los detalles originales.
+
+| Versión de escritorio | Versión móvil |
+| --- | --- |
+| <img src="img/lily-mockup-escritorio.png" alt="Montaje de Lily Perfumes en computador portátil" width="520" /> | <img src="img/lily-mockup-movil.png" alt="Montaje de Lily Perfumes en teléfono móvil" width="520" /> |
+
 
 ## Autora
 
